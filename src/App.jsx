@@ -9,6 +9,7 @@ import EditCar from './Containers/EditCar/EditCar';
 import ViewCar from './Containers/ViewCar/ViewCar';
 import CreateCar from './Containers/CreateCar/CreateCar';
 import Contact from './Components/Contact/Contact';
+import Footer from './Components/Footer/Footer';
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route excat path="/editcar/:id" element={<EditCar />}></Route>
           <Route excat path="/contact" element={<Contact />}></Route>
         </Routes>
+        <Footer />
       </Router>
 
     </div>

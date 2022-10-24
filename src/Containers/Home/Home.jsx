@@ -1,28 +1,45 @@
 import Carousel from "../../Components/Carousel/Carousel";
+import "./Home.scss"
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+
 
 
 
 const Home = () => {
 
   const [cars, setCars] = useState([]);
-  const { id } = useParams()
+  const [selectedMake, setSelectedMake] = useState();
 
-  const getCars = async getCars => {
+
+  const getCars = async make => {
+
     let url = "http://localhost:8080/cars";
+
+    if (make) {
+      url += `?makeName=${make}`
+    }
+
     const response = await fetch(url);
+
     const carsData = await response.json();
     setCars(carsData);
   };
 
   useEffect(() => {
-    getCars(id);
-  }, [id]);
+
+    getCars(selectedMake);
+  }, [selectedMake]);
 
   return <>
-    <h1 className='text-center m-4 car__header' >WELCOME TO THE BEST CAR  DEALERSHIP IN TWON</h1>
+    <h1 className='text-center m-4 car__header' >WELCOME TO THE BEST CAR  DEALERSHIP IN ToWN</h1>
     <h2 > the best of the best one!! </h2>
+    <h4 className='text-center m-4 '>Search by make :  <input type="text"
+      placeholder="search by make  "
+      className="searchBar"
+      onChange={(e) => setSelectedMake(e.target.value)}
+      value={selectedMake}
+    /></h4>
+
     <Carousel cars={cars} />
   </>
 };
